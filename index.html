@@ -3,10 +3,26 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google News web scraping</title>
+
+    <link rel="stylesheet" href="./style/style.css">
+
+    <title>Notices web scraping</title>
   </head>
 
   <body>
-    . . .
+    <div class="room card-library"></div>
   </body>
+
+  <script>
+    (async () => {
+      const response = await fetch('./notices.json');
+      const data = await response.json();
+    
+      const htmlList = data
+      .map( notice => `<a class="card" target="_blank" href=${ notice.href }>${ notice.text }</a>` )
+      .join('');
+
+      document.querySelector('.room').innerHTML = htmlList;
+    })();
+  </script>
 </html>

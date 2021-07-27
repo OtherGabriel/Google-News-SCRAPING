@@ -4,16 +4,17 @@ const fs = require('fs');
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto('https://news.google.com/topstories?hl=pt-BR&gl=BR&ceid=BR:pt-419');
+  await page.goto('https://g1.globo.com/');
   
   const myList = await page.evaluate(() => {
-    const listNotices = document.querySelectorAll(".VDXfz")
-    const arrayNotices = [...listNotices]
+    const listNotices = document.querySelectorAll(".feed-post-link");
+    const arrayNotices = [...listNotices];
     const myList = arrayNotices.map(notice => ({
-      text: notice.nextElementSibling.firstChild.firstChild.textContent
-    }))
+      text: notice.textContent,
+      href: notice.href
+    }));
 
-    return myList
+    return myList;
   })
 
   fs.writeFile('notices.json', JSON.stringify(myList, null, 2), err => {

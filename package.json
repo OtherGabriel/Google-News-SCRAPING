@@ -1,11 +1,12 @@
 {
-  "name": "twitter-scraping",
+  "name": "notices-scraping",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "fs": "^0.0.1-security",
-    "puppeteer": "^10.1.0"
+    "puppeteer": "^10.1.0",
+    "puppeteer-firefox": "^0.5.1"
   }
 }
